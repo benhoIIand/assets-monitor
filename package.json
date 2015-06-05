@@ -1,0 +1,26 @@
+{
+  "name": "assets-analyser-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "browserify": "^10.2.3",
+    "firebase": "^2.2.6",
+    "gulp": "^3.9.0",
+    "react": "^0.13.3",
+    "reactfire": "^0.4.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-load-plugins": "^0.10.0",
+    "react": "^0.13.3",
+    "reactfire": "^0.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
