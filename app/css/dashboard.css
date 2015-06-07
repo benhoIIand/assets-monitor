@@ -53,3 +53,8 @@ body {
     opacity: .05;
     z-index: 0;
 }
+
+.block svg {
+    display: block;
+    margin: 0 auto;
+}

@@ -1,5 +1,6 @@
 import Firebase from 'firebase';
 import React from 'react';
+import Sparkline from 'react-sparkline';
 import {unique} from 'lodash/array';
 import {find, map, reduce} from 'lodash/collection';
 
@@ -33,17 +34,18 @@ var asset = React.createClass({
     },
 
     render: function() {
-        const historyStats = (asset) => {
-            return <h4>{(asset.uncompressed / 1024).toFixed(1)}kb</h4>;
-        };
-
         const blocks = this.state.files.map(function (asset, i) {
             return (
                 <div className="col-md-4" key={'block' + i}>
                     <div className="block">
                         <h1 className="block-title">{asset.file}</h1>
                         <div className="block-data">{(asset.recent.uncompressed / 1024).toFixed(1)}kb</div>
-                        <div className="block-title">{map(asset.history, historyStats)}</div>
+                        <Sparkline data={map(asset.history, (asset) => asset.uncompressed)}
+                                   width="200"
+                                   height="40"
+                                   strokeColor="#67C8FF"
+                                   strokeWidth="2px"
+                                   circleDiameter="2"/>
                     </div>
                 </div>
             );

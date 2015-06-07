@@ -21,6 +21,7 @@ gulp.task('copy', function () {
 });
 
 gulp.task('watch', ['dist'], function () {
+    gulp.watch('app/css/**', ['copy']);
     gulp.watch('app/js/**', ['scripts']);
 });
 
