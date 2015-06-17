@@ -4,16 +4,20 @@ import Sparkline from 'react-sparkline';
 import {unique} from 'lodash/array';
 import {find, map, reduce} from 'lodash/collection';
 
-var asset = React.createClass({
+const firebaseUrl = 'https://asset-monitor.firebaseio.com/assets/';
 
-    getInitialState: function() {
+const Asset = React.createClass({
+
+    getInitialState() {
         return {
             files: []
         };
     },
 
-    componentWillMount: function() {
-        new Firebase('https://asset-monitor.firebaseio.com/assets/images').limitToLast(10).on('value', (data) => {
+    componentWillMount() {
+        const url = `${firebaseUrl}${this.props.type}`;
+
+        new Firebase(url).limitToLast(10).on('value', (data) => {
             const builds = data.val();
             const files = unique(reduce(map(builds, (build) => map(build, (asset) => asset.filename)), (arr, build) => arr.concat(build), []));
 
@@ -33,27 +37,25 @@ var asset = React.createClass({
         });
     },
 
-    render: function() {
-        const blocks = this.state.files.map(function (asset, i) {
+    render() {
+        const blocks = this.state.files.map((asset, i) => {
             return (
-                <div className="col-md-4" key={'block' + i}>
-                    <div className="block">
-                        <h1 className="block-title">{asset.file}</h1>
-                        <div className="block-data">{(asset.recent.uncompressed / 1024).toFixed(1)}kb</div>
-                        <Sparkline data={map(asset.history, (asset) => asset.uncompressed)}
-                                   width="200"
-                                   height="40"
-                                   strokeColor="#67C8FF"
-                                   strokeWidth="2px"
-                                   circleDiameter="2"/>
-                    </div>
+                <div className="block" key={'block' + i}>
+                    <h1 className="block-title">{asset.file}</h1>
+                    <div className="block-data">{(asset.recent.uncompressed / 1024).toFixed(1)}kb</div>
+                    <Sparkline data={map(asset.history, (asset) => asset.uncompressed)}
+                               width="200"
+                               height="40"
+                               strokeColor="#67C8FF"
+                               strokeWidth="2px"
+                               circleDiameter="2"/>
                 </div>
             );
         });
 
-        return <div className="row">{blocks}</div>;
+        return <div>{blocks}</div>;
     }
 
 });
 
-module.exports = asset;
+module.exports = Asset;
