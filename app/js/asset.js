@@ -29,7 +29,9 @@ const Asset = React.createClass({
                     recent: history[history.length - 1],
                     history: history
                 };
-            }).sort((a, b) => b.recent.uncompressed > a.recent.uncompressed);
+            })
+            .filter((asset) => asset.recent !== undefined)
+            .sort((a, b) => b.recent.uncompressed > a.recent.uncompressed);
 
             this.setState({
                 files: assets
