@@ -1,5 +1,5 @@
 import React from 'react';
-import Asset from './Asset';
+import Asset from './asset';
 
 const assetMonitor = React.createClass({
 
