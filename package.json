@@ -1,25 +1,27 @@
 {
-    "name": "assets-analyser-dashboard",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "dependencies": {
-        "firebase": "^2.2.6",
-        "lodash": "^3.9.3",
-        "react": "^0.13.3",
-        "react-sparkline": "^1.0.1",
-        "reactfire": "^0.4.0"
-    },
-    "devDependencies": {
-        "babelify": "^6.1.2",
-        "browserify": "^10.2.3",
-        "gulp": "^3.9.0",
-        "gulp-browserify": "^0.5.1",
-        "gulp-load-plugins": "^0.10.0"
-    },
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
-    "license": "ISC"
+  "name": "assets-analyser-dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^2.2.6",
+    "flexbox-grid": "^1.0.0",
+    "flexboxgrid": "^6.2.0",
+    "lodash": "^3.9.3",
+    "react": "^0.13.3",
+    "react-sparkline": "^1.0.1",
+    "reactfire": "^0.4.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^10.2.3",
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-load-plugins": "^0.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

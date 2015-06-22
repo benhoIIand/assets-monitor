@@ -16,6 +16,7 @@ gulp.task('copy', function () {
     return gulp.src([
             'app/index.html',
             'app/**/*.css',
+            'node_modules/flexboxgrid/dist/flexboxgrid.css',
         ])
         .pipe(gulp.dest('dist'));
 });
