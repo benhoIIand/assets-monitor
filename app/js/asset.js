@@ -17,7 +17,7 @@ const Asset = React.createClass({
     componentWillMount() {
         const url = `${firebaseUrl}${this.props.type}`;
 
-        new Firebase(url).limitToLast(10).on('value', (data) => {
+        new Firebase(url).limitToLast(this.props.numberOfBuilds).on('value', (data) => {
             const builds = data.val();
             const files = unique(reduce(map(builds, (build) => map(build, (asset) => asset.filename)), (arr, build) => arr.concat(build), []));
 

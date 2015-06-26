@@ -14,7 +14,7 @@ const assetMonitor = React.createClass({
             return (
                 <div className="asset-block">
                     <h3 className="asset-title">{type.toUpperCase()}</h3>
-                    <Asset type={type} />
+                    <Asset type={type} numberOfBuilds={20} />
                 </div>
             );
         });
