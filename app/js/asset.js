@@ -49,8 +49,8 @@ const Asset = React.createClass({
                                width="200"
                                height="40"
                                strokeColor="#67C8FF"
-                               strokeWidth="2px"
-                               circleDiameter="2"/>
+                               strokeWidth="4px"
+                               circleDiameter="4"/>
                 </div>
             );
         });
