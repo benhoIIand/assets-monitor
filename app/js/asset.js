@@ -5,7 +5,8 @@ import {unique} from 'lodash/array';
 import {find, map, reduce} from 'lodash/collection';
 
 const firebaseUrl = 'https://asset-monitor.firebaseio.com/assets/';
-const percentageChangeThreshold = 10;
+const PERCENT_CHANGE_THRESHOLD = 10;
+const PRIMARY_METRIC = 'uncompressed';
 
 const Asset = React.createClass({
 
@@ -19,11 +20,11 @@ const Asset = React.createClass({
         const current = assetHistory.pop();
         const penultimate = assetHistory.pop();
 
-        if (current.uncompressed === penultimate.uncompressed) {
+        if (current[PRIMARY_METRIC] === penultimate[PRIMARY_METRIC]) {
             return this.whosANaughtyAsset(assetHistory.concat([penultimate]));
         }
 
-        return this.getPercentageChange(current.uncompressed, penultimate.uncompressed) >= percentageChangeThreshold;
+        return this.getPercentageChange(current[PRIMARY_METRIC], penultimate[PRIMARY_METRIC]) >= PERCENT_CHANGE_THRESHOLD;
     },
 
     getPercentageChange(newVal, oldVal) {
@@ -48,7 +49,7 @@ const Asset = React.createClass({
                 };
             })
             .filter((asset) => asset.recent !== undefined)
-            .sort((a, b) => b.recent.uncompressed > a.recent.uncompressed);
+            .sort((a, b) => b.recent[PRIMARY_METRIC] > a.recent[PRIMARY_METRIC]);
 
             this.setState({
                 files: assets
@@ -62,11 +63,11 @@ const Asset = React.createClass({
                 <div className={['asset', asset.showWarning ? 'asset--warning' : ''].join(' ')} key={'asset' + i}>
                     <h1 className="asset-title">{asset.file}</h1>
                     <div className="asset-data">
-                        <span>{(asset.recent.uncompressed / 1024).toFixed(1)}</span>
+                        <span>{(asset.recent[PRIMARY_METRIC] / 1024).toFixed(1)}</span>
                         <span className="asset-unit">kb</span>
                     </div>
                     <div className="asset-sparkline">
-                        <Sparkline data={map(asset.history, (asset) => asset.uncompressed)}
+                        <Sparkline data={map(asset.history, (asset) => asset[PRIMARY_METRIC])}
                                width="200"
                                height="40"
                                strokeColor="#67C8FF"
