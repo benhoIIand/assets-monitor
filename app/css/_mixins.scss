@@ -1,0 +1,9 @@
+@mixin keyframe ($name) {
+    @keyframes $name {
+        @content;
+    }
+}
+
+@mixin animation ($animation) {
+    animation: $animation;
+}

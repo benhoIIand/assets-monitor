@@ -9,21 +9,32 @@ gulp.task('scripts', function() {
             insertGlobals: true,
             transform: ['babelify']
         }))
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest('dist/js'))
+        .pipe($.livereload());
+});
+
+gulp.task('styles', function () {
+    return gulp.src('app/css/dashboard.scss')
+        .pipe($.sourcemaps.init())
+        .pipe($.sass({
+            errLogToConsole: true
+        }))
+        .pipe($.autoprefixer('last 2 version'))
+        .pipe($.minifyCss())
+        .pipe($.sourcemaps.write('./'))
+        .pipe(gulp.dest('dist/css'))
+        .pipe($.livereload());
 });
 
 gulp.task('copy', function () {
-    return gulp.src([
-            'app/index.html',
-            'app/**/*.css',
-            'node_modules/flexboxgrid/dist/flexboxgrid.css',
-        ])
+    return gulp.src(['app/index.html'])
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', ['dist'], function () {
-    gulp.watch('app/css/**', ['copy']);
+    $.livereload.listen();
+    gulp.watch('app/css/**', ['styles']);
     gulp.watch('app/js/**', ['scripts']);
 });
 
-gulp.task('dist', ['copy', 'scripts']);
+gulp.task('dist', ['copy', 'styles', 'scripts']);

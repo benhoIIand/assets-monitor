@@ -12,8 +12,8 @@ const assetMonitor = React.createClass({
     render() {
         const assets = this.props.fileTypes.map((type) => {
             return (
-                <div className="asset-block">
-                    <h3 className="asset-title">{type.toUpperCase()}</h3>
+                <div className="group">
+                    <h3 className="group-title">{type.toUpperCase()}</h3>
                     <Asset type={type} numberOfBuilds={20} />
                 </div>
             );

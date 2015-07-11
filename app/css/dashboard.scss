@@ -1,0 +1,70 @@
+@import "mixins";
+@import "animations";
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 40px;
+    color: #333333;
+    font-family: Helvetica, sans-serif;
+}
+
+.group {
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.group-title {
+    margin: 0;
+    color: #E2E2E2;
+    font-size: 40px;
+}
+
+.asset {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    float: left;
+}
+
+.asset--warning {
+    @include animation(blink 1.5s infinite);
+    background-color: #F2C100;
+}
+
+.asset-title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.asset-data {
+    margin: 0 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.asset-unit {
+    font-size: .6em;
+}
+
+.asset-chart {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: .05;
+    z-index: 0;
+}
+
+.asset svg {
+    display: block;
+    margin: 0 auto;
+}
