@@ -20,6 +20,10 @@ const Asset = React.createClass({
         const current = assetHistory.pop();
         const penultimate = assetHistory.pop();
 
+        if (penultimate === undefined) {
+            return false;
+        }
+
         if (current[PRIMARY_METRIC] === penultimate[PRIMARY_METRIC]) {
             return this.whosANaughtyAsset(assetHistory.concat([penultimate]));
         }
@@ -40,15 +44,18 @@ const Asset = React.createClass({
 
             const assets = map(files, (file) => {
                 const history = map(builds, (build) => find(build, (asset) => asset.filename === file));
+                const recent = history[history.length - 1];
+                const isDeleted = recent[PRIMARY_METRIC] === undefined;
 
                 return {
-                    file: file,
-                    recent: history[history.length - 1],
-                    history: history,
-                    showWarning: this.whosANaughtyAsset(history)
+                    file,
+                    recent,
+                    history,
+                    isDeleted,
+                    showWarning: isDeleted ? false : this.whosANaughtyAsset(history)
                 };
             })
-            .filter((asset) => asset.recent !== undefined)
+            .filter((asset) => asset.isDeleted)
             .sort((a, b) => b.recent[PRIMARY_METRIC] > a.recent[PRIMARY_METRIC]);
 
             this.setState({
@@ -67,7 +74,7 @@ const Asset = React.createClass({
                         <span className="asset-unit">kb</span>
                     </div>
                     <div className="asset-sparkline">
-                        <Sparkline data={map(asset.history, (asset) => asset[PRIMARY_METRIC])}
+                        <Sparkline data={map(filter(asset.history, (asset) => asset.isDeleted), (asset) => asset[PRIMARY_METRIC])}
                                width="200"
                                height="40"
                                strokeColor="#67C8FF"
