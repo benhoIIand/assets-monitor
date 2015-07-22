@@ -55,7 +55,7 @@ const Asset = React.createClass({
                     showWarning: isDeleted ? false : this.whosANaughtyAsset(history)
                 };
             })
-            .filter((asset) => asset.isDeleted)
+            .filter((asset) => !asset.isDeleted)
             .sort((a, b) => b.recent[PRIMARY_METRIC] > a.recent[PRIMARY_METRIC]);
 
             this.setState({
@@ -74,7 +74,7 @@ const Asset = React.createClass({
                         <span className="asset-unit">kb</span>
                     </div>
                     <div className="asset-sparkline">
-                        <Sparkline data={map(filter(asset.history, (asset) => asset.isDeleted), (asset) => asset[PRIMARY_METRIC])}
+                        <Sparkline data={asset.history.filter((asset) => asset.isDeleted).map((asset) => asset[PRIMARY_METRIC])}
                                width="200"
                                height="40"
                                strokeColor="#67C8FF"
