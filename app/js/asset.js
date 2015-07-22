@@ -64,12 +64,32 @@ const Asset = React.createClass({
         });
     },
 
+    getPreviousChange(assetHistory) {
+        const current = assetHistory.pop();
+        const penultimate = assetHistory.pop();
+
+        if (penultimate === undefined) {
+            return false;
+        }
+
+        if (current[PRIMARY_METRIC] === penultimate[PRIMARY_METRIC]) {
+            return this.getPreviousChange(assetHistory.concat([penultimate]));
+        }
+
+        return penultimate;
+    },
+
     render() {
         const assets = this.state.files.map((asset, i) => {
             return (
                 <div className={['asset', asset.showWarning ? 'asset--warning' : ''].join(' ')} key={'asset' + i}>
                     <h1 className="asset-title">{asset.file}</h1>
                     <div className="asset-data">
+                        <span className="asset-data-previous">
+                            <span>{(this.getPreviousChange(asset.history)[PRIMARY_METRIC] / 1024).toFixed(1)}</span>
+                            <span className="asset-unit">kb</span>
+                            <span> / </span>
+                        </span>
                         <span>{(asset.recent[PRIMARY_METRIC] / 1024).toFixed(1)}</span>
                         <span className="asset-unit">kb</span>
                     </div>

@@ -2,6 +2,7 @@
 @import "animations";
 
 $body-margin: 40px;
+$text-color: #333333;
 
 * {
     box-sizing: border-box;
@@ -12,7 +13,7 @@ $body-margin: 40px;
 
 body {
     margin: $body-margin 0;
-    color: #333333;
+    color: $text-color;
     font-family: Helvetica, sans-serif;
 }
 
@@ -63,6 +64,11 @@ body {
     margin: 0 20px;
     font-size: 40px;
     text-align: center;
+}
+
+.asset-data-previous {
+    color: lighten($text-color, 40%);
+    font-size: 26px;
 }
 
 .asset-unit {
