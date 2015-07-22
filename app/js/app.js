@@ -1,26 +1,19 @@
 import React from 'react';
-import Asset from './asset';
+import AssetList from './assetList';
+import PageWeight from './pageWeight';
 
 const assetMonitor = React.createClass({
 
-    getDefaultProps() {
-        return {
-            fileTypes: ['css', 'js', 'images']
-        };
-    },
-
     render() {
-        const assets = this.props.fileTypes.map((type) => {
-            return (
-                <div className="group">
-                    <h3 className="group-title">{type.toUpperCase()}</h3>
-                    <Asset type={type} numberOfBuilds={20} />
-                </div>
-            );
-        });
-
         return (
-            <div>{assets}</div>
+            <div>
+                <div className="col-2">
+                    <PageWeight />
+                </div>
+                <div className="col-2">
+                    <AssetList />
+                </div>
+            </div>
         );
     }
 
