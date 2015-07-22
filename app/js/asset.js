@@ -74,7 +74,7 @@ const Asset = React.createClass({
                         <span className="asset-unit">kb</span>
                     </div>
                     <div className="asset-sparkline">
-                        <Sparkline data={asset.history.filter((asset) => asset.isDeleted).map((asset) => asset[PRIMARY_METRIC])}
+                        <Sparkline data={asset.history.filter((asset) => !asset.isDeleted).map((asset) => asset[PRIMARY_METRIC])}
                                width="200"
                                height="40"
                                strokeColor="#67C8FF"
