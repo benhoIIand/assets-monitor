@@ -82,7 +82,7 @@ const Asset = React.createClass({
     render() {
         const assets = this.state.files.map((asset, i) => {
             return (
-                <div className={['asset', asset.showWarning ? 'asset--warning' : ''].join(' ')} key={'asset' + i}>
+                <div id={asset.file} className={['asset', asset.showWarning ? 'asset--warning' : ''].join(' ')} key={'asset' + i}>
                     <h1 className="asset-title">{asset.file}</h1>
                     <div className="asset-data">
                         <span className="asset-data-previous">
