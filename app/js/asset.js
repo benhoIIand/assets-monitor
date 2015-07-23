@@ -69,7 +69,7 @@ const Asset = React.createClass({
         const penultimate = assetHistory.pop();
 
         if (penultimate === undefined) {
-            return false;
+            return current;
         }
 
         if (current[PRIMARY_METRIC] === penultimate[PRIMARY_METRIC]) {
