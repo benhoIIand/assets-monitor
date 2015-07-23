@@ -45,7 +45,7 @@ const Asset = React.createClass({
             const assets = map(files, (file) => {
                 const history = map(builds, (build) => find(build, (asset) => asset.filename === file));
                 const recent = history[history.length - 1];
-                const isDeleted = recent[PRIMARY_METRIC] === undefined;
+                const isDeleted = !recent || recent[PRIMARY_METRIC] === undefined;
 
                 return {
                     file,
