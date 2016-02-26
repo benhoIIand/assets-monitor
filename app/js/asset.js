@@ -68,7 +68,13 @@ const Asset = React.createClass({
         const current = assetHistory.pop();
         const penultimate = assetHistory.pop();
 
-        if (penultimate === undefined || current === undefined) {
+        if (current === undefined) {
+            return {
+                [PRIMARY_METRIC]: 1024
+            };
+        }
+
+        if (penultimate === undefined) {
             return current;
         }
 
