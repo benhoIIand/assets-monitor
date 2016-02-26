@@ -68,7 +68,7 @@ const Asset = React.createClass({
         const current = assetHistory.pop();
         const penultimate = assetHistory.pop();
 
-        if (penultimate === undefined) {
+        if (penultimate === undefined || current === undefined) {
             return current;
         }
 
