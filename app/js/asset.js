@@ -55,7 +55,7 @@ const Asset = React.createClass({
                     showWarning: isDeleted ? false : this.whosANaughtyAsset(history)
                 };
             })
-            .filter((asset) => !asset.isDeleted)
+            .filter((asset) => asset && !asset.isDeleted)
             .sort((a, b) => b.recent[PRIMARY_METRIC] > a.recent[PRIMARY_METRIC]);
 
             this.setState({
